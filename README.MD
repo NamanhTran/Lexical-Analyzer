@@ -1,4 +1,4 @@
-# CPSC 323 PROJECT
+# Lexical Analyzer
 
 This project is a simple implementation of a compiler.
 
