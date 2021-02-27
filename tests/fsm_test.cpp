@@ -8,6 +8,9 @@
 #include <set>
 #include <unordered_map>
 #include <stdio.h>
+#include<iomanip>
+
+void outputTextFile(vector <pair<string, string>> x);
 
 int main() {
     Lexer_FSM fsm;
@@ -27,12 +30,22 @@ int main() {
     }
     test1_table.add(fsm.get_token(), fsm.get_lexeme());
     
-    auto vector_pairs = test1_table.get_all_pairs();
-    std::cout << "TOKEN     Lexemes\n";
-    for(auto it = vector_pairs.begin(); it != vector_pairs.end(); it++) {
-        std::cout << it->first << " " << it->second << "\n";
-    }
+    outputTextFile(test1_table.get_all_pairs());
 
     // the key is the token and value is the lexeme
     return 0;
+}
+
+void outputTextFile(vector <pair<string, string>> x)
+{
+  std::ofstream outputFile;
+  outputFile.open("output.txt");
+  outputFile << "       Output:       " << endl;
+  outputFile << "Token          Lexeme" << endl;
+  outputFile << "---------------------" << endl;
+  for (int i = 0; i < x.size(); ++i)
+  {
+    outputFile << x[i].first << std::right << setw(21 - x[i].first.length()) << x[i].second << std::endl;
+  }
+  outputFile.close();
 }

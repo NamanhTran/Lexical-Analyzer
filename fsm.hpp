@@ -29,6 +29,9 @@ class Lexer_FSM {
         // Keep track on which state the FSM is in
         std::string state;
 
+        // A flag to check if the lexeme has a decial already
+        int has_decimal;
+
         // Create sets of keywords, operators, and seperators
         std::set<std::string> keywords_set;
         std::set<std::string> operators_set;
@@ -61,10 +64,11 @@ Lexer_FSM::Lexer_FSM() {
                 {"Alphabetical", "Identifier"},
                 {"Seperator", "Seperator"},
                 {"Operator", "Operator"},
-                {"Numerical", "Error"},
+                {"Numerical", "Real"},
                 {"_", "Error"},
                 {"$", "Error"},
                 {"Space", "Starting"},
+                {".", "Seperator"},
                 {"Everything Else", "Error"}
             }
         },
@@ -78,6 +82,7 @@ Lexer_FSM::Lexer_FSM() {
                 {"_", "Identifier"},
                 {"$", "Identifier"},
                 {"Space", "Starting"},
+                {".", "Error"},
                 {"Everything Else", "Error"}
             }
         },
@@ -91,6 +96,7 @@ Lexer_FSM::Lexer_FSM() {
                 {"_", "Error"},
                 {"$", "Error"},
                 {"Space", "Starting"},
+                {".", "Error"},
                 {"Everything Else", "Error"}
             }
         },
@@ -104,6 +110,7 @@ Lexer_FSM::Lexer_FSM() {
                 {"_", "Error"},
                 {"$", "Error"},
                 {"Space", "Starting"},
+                {".", "Error"},
                 {"Everything Else", "Error"}
             }
         },
@@ -117,6 +124,21 @@ Lexer_FSM::Lexer_FSM() {
                 {"_", "Error"},
                 {"$", "Error"},
                 {"Space", "Starting"},
+                {".", "Error"},
+                {"Everything Else", "Error"}
+            }
+        },
+
+        {"Real",
+            {
+                {"Alphabetical", "Error"},
+                {"Seperator", "Error"},
+                {"Operator", "Error"},
+                {"Numerical", "Real"},
+                {"_", "Error"},
+                {"$", "Error"},
+                {"Space", "Starting"},
+                {".", "Error"},
                 {"Everything Else", "Error"}
             }
         }
@@ -129,15 +151,32 @@ void Lexer_FSM::send_input(char character) {
     std::string inputType = get_char_type(character);
 
     // Get the next state of the FSM 
-    this->state = this->state_transition_table[this->state][inputType];
+    if (this->state == "Real" && inputType == "." && !this->has_decimal) {
+        this->has_decimal = true;
+        this->state = "Real";
+    }
+
+    // If state is at a seperator (the seperator is a '.'), and the input type is numerical then move it to the real number state
+    else if (this->state == "Seperator" && inputType == "Numerical" && this->lexeme[0] == '.') {
+        this->state = "Real";
+    }
+
+    // Get the state from the state table
+    else {
+        this->state = this->state_transition_table[this->state][inputType];
+    }
 
     // If the character is a space that means it is a new lexeme so we do not want to add it to the lexeme string
     if (character != ' ') { 
-        lexeme += character;
+        this->lexeme += character;
     }
 
+    // If a space is the input type then reset the FSM and prepare for the next lexeme
     else {
-        state = "Starting";
+        this->has_decimal = false;
+        this->lexeme = "";
+        this->state = "Starting";
+
     }
 }
 
@@ -146,8 +185,12 @@ std::string Lexer_FSM::get_char_type(char character) {
     // Set a string class for the character so we can use the string to search through the sets
     std::string characterString(1, character);
 
+    if (character == '.') {
+        return ".";
+    }
+
     // Checks if the character passed is alphabetical
-    if (isalpha(character)) {
+    else if (isalpha(character)) {
         return "Alphabetical";
     }
 

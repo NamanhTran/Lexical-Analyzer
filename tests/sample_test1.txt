@@ -1,1 +1,1 @@
-if ( num = input ) { total = num + 1 ; }
+int { num1 , num2$ , large_num .0 123 5. .. 0 .000000 . 0.0. 5.1 ; } int number ; number = 9 ;
