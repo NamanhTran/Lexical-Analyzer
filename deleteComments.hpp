@@ -1,12 +1,11 @@
 #include<iostream>
 #include<fstream>
-using namespace std;
 
-string deleteComments(string c)
+std::string deleteComments(std::string c)
 {
   int n = c.length();
   bool comment = false;
-  string newString;
+  std::string newString;
 
   //Traverse the string
   for(int i = 0; i < n; ++i)
