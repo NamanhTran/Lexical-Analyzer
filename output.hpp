@@ -3,18 +3,14 @@
 #include<fstream>
 #include<vector>
 #include<iomanip>
-using namespace std;
 
-void outputTextFile(vector <pair<string, string>> x)
+void outputTextFile(std::vector <std::pair<std::string, std::string>> x)
 {
-  ofstream outputFile;
+  std::ofstream outputFile;
   outputFile.open("output.txt");
-  outputFile << "       Output:       " << endl;
-  outputFile << "Token          Lexeme" << endl;
-  outputFile << "---------------------" << endl;
   for (int i = 0; i < x.size(); ++i)
   {
-    outputFile << x[i].first << setw(12) << x[i].second << endl;
+    outputFile << x[i].first << std::right << std::setw(21-x[i].first.length()) << x[i].second << std::endl;
   }
   outputFile.close();
 }
