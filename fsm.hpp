@@ -150,7 +150,7 @@ void Lexer_FSM::send_input(char character) {
     // Get the input type of the character provided
     std::string inputType = get_char_type(character);
 
-    // Get the next state of the FSM 
+    // If the input type is a '.' and the state is at a real number then make sure that this is the first decimal
     if (this->state == "Real" && inputType == "." && !this->has_decimal) {
         this->has_decimal = true;
         this->state = "Real";
