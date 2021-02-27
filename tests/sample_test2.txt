@@ -1,0 +1,11 @@
+! some info that needs to be removed !
+
+int x$, y_, temp1;
+bool flag = True
+if(x$ > y_) {
+    flag = false;
+} else {
+    temp1 = x$;
+    x$ = y_;
+    y_ = temp1;
+}
