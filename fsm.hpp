@@ -53,9 +53,9 @@ Lexer_FSM::Lexer_FSM() {
     this->state = "Starting";
 
     // Load all of the strings from the token files into the appropriate set.
-    this->insert_strings_from_file_into_set("../tokens/keywordsLexemes.txt", &keywords_set);
-    this->insert_strings_from_file_into_set("../tokens/operatorsLexemes.txt", &operators_set);
-    this->insert_strings_from_file_into_set("../tokens/seperatorsLexemes.txt", &seperators_set);
+    this->insert_strings_from_file_into_set("./tokens/keywordsLexemes.txt", &keywords_set);
+    this->insert_strings_from_file_into_set("./tokens/operatorsLexemes.txt", &operators_set);
+    this->insert_strings_from_file_into_set("./tokens/seperatorsLexemes.txt", &seperators_set);
 
     // The state transition table declaration
     this->state_transition_table = {
@@ -64,7 +64,7 @@ Lexer_FSM::Lexer_FSM() {
                 {"Alphabetical", "Identifier"},
                 {"Seperator", "Seperator"},
                 {"Operator", "Operator"},
-                {"Numerical", "Real"},
+                {"Numerical", "Integer"},
                 {"_", "Error"},
                 {"$", "Error"},
                 {"Space", "Starting"},
@@ -141,6 +141,20 @@ Lexer_FSM::Lexer_FSM() {
                 {".", "Error"},
                 {"Everything Else", "Error"}
             }
+        },
+
+        {"Integer",
+            {
+                {"Alphabetical", "Error"},
+                {"Seperator", "Error"},
+                {"Operator", "Error"},
+                {"Numerical", "Integer"},
+                {"_", "Error"},
+                {"$", "Error"},
+                {"Space", "Starting"},
+                {".", "Real"},
+                {"Everything Else", "Error"}
+            }
         }
     };
 }
@@ -151,7 +165,7 @@ void Lexer_FSM::send_input(char character) {
     std::string inputType = get_char_type(character);
 
     // If the input type is a '.' and the state is at a real number then make sure that this is the first decimal
-    if (this->state == "Real" && inputType == "." && !this->has_decimal) {
+    if (this->state == "Numerical" && inputType == "." && !this->has_decimal) {
         this->has_decimal = true;
         this->state = "Real";
     }
