@@ -1,0 +1,12 @@
+! Test case to check all keywords !
+
+int, float, bool, True, False;
+if, else, then, endif, endelse, while;
+whileend, do, enddo, for, endfor, STDinput, STDoutput;
+and, or, not;
+true, false;
+! Testing real cases !
+float num1 =0.0
+float num2 = .0
+float num3=.2
+! comment !
