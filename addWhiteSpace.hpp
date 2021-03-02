@@ -14,7 +14,6 @@ bool isSeparatorOrOperator(char ch)
 
 std::string addWhiteSpace(std::string c)
 {
-  std::string newString;
   std::string temp1;
   std::string temp2;
   bool needSpace;
@@ -44,10 +43,9 @@ std::string addWhiteSpace(std::string c)
     {
       temp1 = c.substr(0,i);
       temp2 = c.substr(i+1, c.length());
-      newString = temp1 + " " + c[i] + " " + temp2;
-      c = newString;
+      c = temp1 + " " + c[i] + " " + temp2;
       i++;
     }
   }
-  return newString;
+  return c;
 }
