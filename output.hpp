@@ -8,8 +8,8 @@ void outputTextFile(std::vector <std::pair<std::string, std::string>> x)
 {
   std::ofstream outputFile;
   outputFile.open("output.txt");
-  outputFile << "        Output       "
-  outputFile << "Token          Lexeme" << endl;
+  outputFile << "        Output       " << std::endl;
+  outputFile << "Token          Lexeme" << std::endl;
   for (int i = 0; i < x.size(); ++i)
   {
     outputFile << x[i].first << std::right << std::setw(21-x[i].first.length()) << x[i].second << std::endl;
