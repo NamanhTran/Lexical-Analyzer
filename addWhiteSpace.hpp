@@ -29,7 +29,7 @@ std::string addWhiteSpace(std::string c)
 
     //This if statement is for float numbers, if a period is being used for
     //a float number, we should not add spaces in between the period
-    if(isdigit(c[i+1]) && c[i] == '.')
+    if(isdigit(c[i-1]) && c[i] == '.')
     {
       continue;
     }
