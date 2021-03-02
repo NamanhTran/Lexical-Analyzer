@@ -33,6 +33,10 @@ std::string addWhiteSpace(std::string c)
     {
       continue;
     }
+    else if (isdigit(c[i+1]) && c[i] == '.')
+    {
+      continue;
+    }
     
     // If the current character we are at is an operator or a separator, we will
     // add a space before and after the operator or separator
