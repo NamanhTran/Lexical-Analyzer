@@ -20,7 +20,7 @@ std::string deleteComments(std::string c)
       {
         continue;
       }
-      //If it starts with a comment, then comment turns
+      //If it starts with a comment, then comment turns true
       else if (c[i] == '!')
       {
         comment = true;
