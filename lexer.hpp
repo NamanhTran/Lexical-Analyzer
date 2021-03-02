@@ -9,6 +9,7 @@
 #include "replace_char.hpp"
 #include "addWhiteSpace.hpp"
 
+// The lexical analyzer's logic. Takes in a string path to the txt file.
 void lexer(std::string file_path) {
     // Initalize file_string, symbol tables to store tokens and lexemes, and FSM
     std::string file_string;
