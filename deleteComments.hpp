@@ -15,16 +15,15 @@ std::string deleteComments(std::string c)
       {
         comment = false;
       }
-      //This is where skipping the entire line happens
+      //This is where skipping the contents in the comments happens
       else if (comment == true)
       {
         continue;
       }
-      //If it starts with a comment, then comment turns true and we incremement
+      //If it starts with a comment, then comment turns
       else if (c[i] == '!')
       {
         comment = true;
-        i++;
       }
       //Else we add each letter to the new string
       else
