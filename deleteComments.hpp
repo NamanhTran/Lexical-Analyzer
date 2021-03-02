@@ -11,7 +11,7 @@ std::string deleteComments(std::string c)
   for(int i = 0; i < n; ++i)
   {
       // This happens if we are at the end of a comment
-      if (comment == true && c[i] == '\n')
+      if (comment == true && (c[i] == '\n' || c[i] == '!'))
       {
         comment = false;
       }
