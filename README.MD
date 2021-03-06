@@ -13,8 +13,8 @@ REAL NUMBERS = reals or floats (5.0, 0.9, 1.75, etc.)<br />
 ## How to Use
 Download the project from the repo. <br />
 Navigate to the project directory's test folder and use the commands:
-> g++ -std=c++0x fsm_test.cpp <br />
-> ./a.out.
+> g++ main.cpp -o main <br />
+> ./main
 
 ## Team Members
 Blue B
