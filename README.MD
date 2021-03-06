@@ -14,7 +14,7 @@ REAL NUMBERS = reals or floats (5.0, 0.9, 1.75, etc.)<br />
 Download the project from the repo. <br />
 Navigate to the project directory's test folder and use the commands:
 > g++ main.cpp -o main <br />
-> ./main
+> ./main [path-to-file]
 
 ## Team Members
 Blue B
