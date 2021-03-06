@@ -1,13 +1,13 @@
 #include <iostream>
 #include <algorithm>
 
-#include "input_file.hpp"
 #include "fsm.hpp"
-#include "output.hpp"
 #include "symbol_table.hpp"
-#include "deleteComments.hpp"
-#include "replace_char.hpp"
-#include "addWhiteSpace.hpp"
+#include "./utils/input_file.hpp"
+#include "./utils/output.hpp"
+#include "./utils/deleteComments.hpp"
+#include "./utils/replace_char.hpp"
+#include "./utils/addWhiteSpace.hpp"
 
 // The lexical analyzer's logic. Takes in a string path to the txt file.
 void lexer(std::string file_path) {
